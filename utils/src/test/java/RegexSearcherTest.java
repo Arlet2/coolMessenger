@@ -6,6 +6,7 @@ public class RegexSearcherTest {
     private final String portRegex = "(?<=port:\\s{1,5})[^\\s]*";
     private final String hostNameRegex = "(?<=address:\\s{1,5})[^\\s]*";
     private final String versionRegex = "(?<=version:\\s{1,5})[^\\s]*";
+
     @Test
     public void findPortInLinesTest() {
         String input = "port: 123\n" +
@@ -15,12 +16,14 @@ public class RegexSearcherTest {
 
         Assert.assertEquals("123", result);
     }
-    @Test (expected = NotFoundByRegexException.class)
+
+    @Test(expected = NotFoundByRegexException.class)
     public void noFindPortTest() {
         String input = "address: 127.0.0.1";
 
         RegexSearcher.searchFirst(portRegex, input);
     }
+
     @Test
     public void countRegexTest() {
         String input = "port: 123 \n" +
@@ -43,8 +46,8 @@ public class RegexSearcherTest {
 
     @Test
     public void findHostNameInLines() {
-        String input = "port: 123 \n"+
-                "address: bao.cf \n"+
+        String input = "port: 123 \n" +
+                "address: bao.cf \n" +
                 "version: 123";
 
         String result = RegexSearcher.searchFirst(hostNameRegex, input);
@@ -54,8 +57,8 @@ public class RegexSearcherTest {
 
     @Test
     public void findVersionInLines() {
-        String input = "port: 123 \n"+
-                "address: bao.cf \n"+
+        String input = "port: 123 \n" +
+                "address: bao.cf \n" +
                 "version: 123 ";
 
         String result = RegexSearcher.searchFirst(versionRegex, input);

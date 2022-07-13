@@ -11,6 +11,7 @@ public class SerializerTest {
 
         Assert.assertEquals(expected, result);
     }
+
     @Test
     public void doubleConversionTest() {
         String arg = "Test123$#2";
