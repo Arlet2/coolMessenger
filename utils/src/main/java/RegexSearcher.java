@@ -13,10 +13,11 @@ public class RegexSearcher {
             throw new NotFoundByRegexException();
         }
     }
+
     public static int searchFindCount(String regex, String input) {
         Matcher matcher = Pattern.compile(regex).matcher(input);
-        int counter=0;
-        while(matcher.find()) counter++;
+        int counter = 0;
+        while (matcher.find()) counter++;
         return counter;
     }
 }
