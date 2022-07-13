@@ -1,4 +1,8 @@
-client\target
-server\target
-utils\target
-.idea\
+client/target
+server/target
+utils/target
+.idea/
+coolMessenger.iml
+client/client.iml
+server/server.iml
+utils/utils.iml
