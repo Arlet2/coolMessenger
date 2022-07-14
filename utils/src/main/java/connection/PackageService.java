@@ -1,6 +1,6 @@
-package connection.data_exchanging;
+package connection;
 
-import connection_utils.DataTransferObject;
+import connection.data_objects.DataTransferObject;
 import exceptions.SerializerException;
 
 public interface PackageService {

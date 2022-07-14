@@ -1,12 +1,14 @@
 package connection.data_exchanging;
 
+import connection.BasicExchangeHandler;
+import connection.ExchangeHandler;
 import connection.User;
-import connection_utils.AuthDataObject;
+import connection.data_objects.AuthDataObject;
 import exceptions.AuthException;
 
 import java.net.Socket;
 
-public class BasicProtocolHandler implements ProtocolHandler {
+public class BasicServerProtocolHandler implements ServerProtocolHandler {
     public static final int PROTOCOL_NUMBER = 10001;
 
     private final ExchangeHandler exchangeHandler = new BasicExchangeHandler();

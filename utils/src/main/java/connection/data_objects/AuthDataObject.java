@@ -1,4 +1,4 @@
-package connection_utils;
+package connection.data_objects;
 
 public class AuthDataObject {
     private final int protocol;

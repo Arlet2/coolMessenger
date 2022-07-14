@@ -1,6 +1,6 @@
-package connection.data_exchanging;
+package connection;
 
-import connection_utils.DataTransferObject;
+import connection.data_objects.DataTransferObject;
 import encryptors.EncryptorService;
 import exceptions.SerializerException;
 import utils.Serializer;

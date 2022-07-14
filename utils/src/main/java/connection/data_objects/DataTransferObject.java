@@ -1,7 +1,4 @@
-package connection_utils;
-
-import exceptions.SerializerException;
-import utils.Serializer;
+package connection.data_objects;
 
 public class DataTransferObject {
     private final byte[] bytes;
