@@ -5,6 +5,7 @@ public class AuthDataObject {
     private final String nickname;
     private final String password;
     private final boolean isLogin;
+
     AuthDataObject(int protocol, String nickname, String password, boolean isLogin) {
         this.protocol = protocol;
         this.nickname = nickname;

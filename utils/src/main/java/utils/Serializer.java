@@ -25,7 +25,7 @@ public class Serializer {
             objStream.flush();
             return byteStream.toByteArray();
         } catch (IOException e) {
-            throw new SerializerException("Cannot convert "+object.getClass()+" to bytes");
+            throw new SerializerException("Cannot convert " + object.getClass() + " to bytes");
         }
     }
 }

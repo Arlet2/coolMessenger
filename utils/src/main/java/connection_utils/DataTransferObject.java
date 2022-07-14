@@ -7,6 +7,7 @@ public class DataTransferObject {
     private final byte[] bytes;
     private final DataCode code;
     private final int encryptionProtocol;
+
     public enum DataCode {
         AUTH_INFO,
         MESSAGE,
@@ -14,6 +15,7 @@ public class DataTransferObject {
         PICTURE,
         FILE
     }
+
     public DataTransferObject(byte[] data, DataCode code, int encryptionProtocol) {
         this.encryptionProtocol = encryptionProtocol;
         bytes = data;
