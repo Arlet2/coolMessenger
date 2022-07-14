@@ -24,6 +24,11 @@ public class BasicPackageService implements PackageService {
         return generalizedPackage(Serializer.convertObjectToBytes(object), code);
     }
 
+    @Override
+    public DataTransferObject decryptPackageData(DataTransferObject dto) {
+        return new DataTransferObject(encryptor.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
+    }
+
     private DataTransferObject generalizedPackage(byte[] data, DataTransferObject.DataCode code) {
         return new DataTransferObject(data, code, encryptor.getEncryptionProtocol());
     }
