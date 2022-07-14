@@ -1,3 +1,5 @@
+package utils;
+
 import exceptions.ConfigDataNotFoundException;
 import exceptions.NotFoundByRegexException;
 import exceptions.StreamReadingException;

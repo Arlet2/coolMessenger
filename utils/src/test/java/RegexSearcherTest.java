@@ -1,6 +1,7 @@
 import exceptions.NotFoundByRegexException;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.RegexSearcher;
 
 public class RegexSearcherTest {
     private final String portRegex = "(?<=port:\\s{1,5})[^\\s]*";

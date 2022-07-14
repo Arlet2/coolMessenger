@@ -1,3 +1,5 @@
+package utils;
+
 import exceptions.NotFoundByRegexException;
 
 import java.util.regex.Matcher;
