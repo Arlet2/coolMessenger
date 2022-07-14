@@ -1,10 +1,11 @@
+import exceptions.SerializerException;
 import org.junit.Assert;
 import org.junit.Test;
 import utils.Serializer;
 
 public class SerializerTest {
     @Test
-    public void convertToObjectTest() {
+    public void convertToObjectTest() throws SerializerException {
         Object result;
         String expected = "Hello, world";
 
@@ -14,7 +15,7 @@ public class SerializerTest {
     }
 
     @Test
-    public void doubleConversionTest() {
+    public void doubleConversionTest() throws SerializerException {
         String arg = "Test123$#2";
 
         byte[] bytes = Serializer.convertObjectToBytes(arg);

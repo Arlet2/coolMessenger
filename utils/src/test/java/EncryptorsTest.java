@@ -1,12 +1,13 @@
 import encryptors.EncryptorFactory;
 import encryptors.EncryptorService;
+import exceptions.SerializerException;
 import org.junit.Assert;
 import org.junit.Test;
 import utils.Serializer;
 
 public class EncryptorsTest {
     @Test
-    public void nullEncryptorEncryptionTest() {
+    public void nullEncryptorEncryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorFactory.getEncryptor(0);
         String input = "Hello, world!";
 
@@ -16,7 +17,7 @@ public class EncryptorsTest {
         Assert.assertEquals(input, result);
     }
     @Test
-    public void nullEncryptorDecryptionTest() {
+    public void nullEncryptorDecryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorFactory.getEncryptor(0);
         String input = "Hello, world!";
 
@@ -26,7 +27,7 @@ public class EncryptorsTest {
         Assert.assertEquals(input, result);
     }
     @Test
-    public void simpleEncryptorEncryptionTest() {
+    public void simpleEncryptorEncryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorFactory.getEncryptor(1);
         String input = "Hello, world!";
 
@@ -35,7 +36,7 @@ public class EncryptorsTest {
     }
 
     @Test
-    public void simpleEncryptorDecryptionTest() {
+    public void simpleEncryptorDecryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorFactory.getEncryptor(1);
         String input = "Hello, encryptor!";
 

@@ -1,20 +1,23 @@
 package utils;
 
+import exceptions.SerializerException;
+
 import java.io.*;
 
 public class Serializer {
-    public static Object convertBytesToObject(byte[] bytes) {
+    public static Object convertBytesToObject(byte[] bytes) throws SerializerException {
         try {
             ByteArrayInputStream byteStream = new ByteArrayInputStream(bytes);
             ObjectInputStream objStream = new ObjectInputStream(byteStream);
             return objStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return new String(bytes);
+        } catch (IOException e) {
+            throw new SerializerException("Cannot convert bytes to object");
+        } catch (ClassNotFoundException e) {
+            throw new SerializerException("Class was not found to convert from bytes");
         }
     }
 
-    public static byte[] convertObjectToBytes(Object object) {
+    public static byte[] convertObjectToBytes(Object object) throws SerializerException {
         try {
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
             ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
@@ -22,7 +25,7 @@ public class Serializer {
             objStream.flush();
             return byteStream.toByteArray();
         } catch (IOException e) {
-            return object.toString().getBytes();
+            throw new SerializerException("Cannot convert "+object.getClass()+" to bytes");
         }
     }
 }
