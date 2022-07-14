@@ -1,7 +1,8 @@
 package encryptors;
 
-public class NullEncryptor implements EncryptorService{
+public class NullEncryptor implements EncryptorService {
     public static final int ENCRYPTION_PROTOCOL = 0;
+
     @Override
     public int getEncryptionProtocol() {
         return ENCRYPTION_PROTOCOL;
