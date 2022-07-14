@@ -6,10 +6,10 @@ import exceptions.AuthException;
 
 import java.net.Socket;
 
-public class BaseProtocolHandler implements ProtocolHandler {
+public class BasicProtocolHandler implements ProtocolHandler {
     public static final int PROTOCOL_NUMBER = 10001;
 
-    private final ExchangeHandler exchangeHandler = new BaseExchangeHandler();
+    private final ExchangeHandler exchangeHandler = new BasicExchangeHandler();
 
     @Override
     public AuthDataObject createSession(Socket socket) {
