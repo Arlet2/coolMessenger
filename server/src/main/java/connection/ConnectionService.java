@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Optional;
 
 public class ConnectionService {
     private ServerSocket serverSocket;
@@ -50,12 +51,13 @@ public class ConnectionService {
     }
 
     private void closeServer() {
-        try {
-            if (serverSocket != null)
+        Optional.ofNullable(serverSocket).ifPresent((serverSocket) -> {
+            try {
                 serverSocket.close();
-        } catch (IOException ignored) {
-            // если не удалось закрыть, соединение будет пересоздано в любом случае
-        }
+            } catch (IOException ignored) {
+                // если не удалось закрыть, соединение будет пересоздано в любом случае
+            }
+        });
     }
 
     public Socket connectWithClient() throws IOException {
