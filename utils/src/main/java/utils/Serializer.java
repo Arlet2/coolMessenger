@@ -11,8 +11,10 @@ public class Serializer {
             ObjectInputStream objStream = new ObjectInputStream(byteStream);
             return objStream.readObject();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new SerializerException("Cannot convert bytes to object");
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             throw new SerializerException("Class was not found to convert from bytes");
         }
     }
@@ -25,6 +27,7 @@ public class Serializer {
             objStream.flush();
             return byteStream.toByteArray();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new SerializerException("Cannot convert " + object.getClass() + " to bytes");
         }
     }
