@@ -1,4 +1,4 @@
-import encryptors.EncryptorFactory;
+import encryptors.EncryptorsFactory;
 import encryptors.EncryptorService;
 import exceptions.SerializerException;
 import org.junit.Assert;
@@ -8,7 +8,7 @@ import utils.Serializer;
 public class EncryptorsTest {
     @Test
     public void nullEncryptorEncryptionTest() throws SerializerException {
-        EncryptorService encryptor = EncryptorFactory.getEncryptor(0);
+        EncryptorService encryptor = EncryptorsFactory.getEncryptor(0);
         String input = "Hello, world!";
 
         String result = (String)
@@ -18,7 +18,7 @@ public class EncryptorsTest {
     }
     @Test
     public void nullEncryptorDecryptionTest() throws SerializerException {
-        EncryptorService encryptor = EncryptorFactory.getEncryptor(0);
+        EncryptorService encryptor = EncryptorsFactory.getEncryptor(0);
         String input = "Hello, world!";
 
         String result = (String)
@@ -28,7 +28,7 @@ public class EncryptorsTest {
     }
     @Test
     public void simpleEncryptorEncryptionTest() throws SerializerException {
-        EncryptorService encryptor = EncryptorFactory.getEncryptor(1);
+        EncryptorService encryptor = EncryptorsFactory.getEncryptor(1);
         String input = "Hello, world!";
 
         byte[] result = encryptor.encrypt(Serializer.convertObjectToBytes(input));
@@ -37,7 +37,7 @@ public class EncryptorsTest {
 
     @Test
     public void simpleEncryptorDecryptionTest() throws SerializerException {
-        EncryptorService encryptor = EncryptorFactory.getEncryptor(1);
+        EncryptorService encryptor = EncryptorsFactory.getEncryptor(1);
         String input = "Hello, encryptor!";
 
         String result = (String) Serializer.convertBytesToObject(

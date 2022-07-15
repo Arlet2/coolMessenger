@@ -1,6 +1,6 @@
 package encryptors;
 
-public class EncryptorFactory {
+public class EncryptorsFactory {
     public static EncryptorService getEncryptor(int encryptionProtocol) {
         switch (encryptionProtocol) {
             case SimpleEncryptor.ENCRYPTION_PROTOCOL: // 1
