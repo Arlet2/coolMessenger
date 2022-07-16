@@ -1,6 +1,11 @@
 package encryptors;
 
 public class NullEncryptor implements EncryptorService {
+
+    protected NullEncryptor() {
+
+    }
+
     public static final int ENCRYPTION_PROTOCOL = 0;
 
     @Override

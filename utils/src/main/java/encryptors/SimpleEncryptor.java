@@ -1,10 +1,12 @@
 package encryptors;
 
-import java.io.ByteArrayInputStream;
-
 public class SimpleEncryptor implements EncryptorService {
 
     public static final int ENCRYPTION_PROTOCOL = 1;
+
+    protected SimpleEncryptor() {
+
+    }
 
     @Override
     public int getEncryptionProtocol() {
