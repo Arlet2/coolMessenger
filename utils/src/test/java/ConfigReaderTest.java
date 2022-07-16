@@ -12,14 +12,14 @@ public class ConfigReaderTest {
 
     @Before
     public void createDefaultReader() {
-        reader = new StringReader("hostname: localhost\n"+
+        reader = new StringReader("hostname: localhost\n" +
                 "port: 13456");
     }
 
     @Test
     public void readConfigTest() {
         InetSocketAddress expected = new InetSocketAddress("gasgsf", 13456);
-        reader = new StringReader("hostname: gasgsf\n"+
+        reader = new StringReader("hostname: gasgsf\n" +
                 "port: 13456");
 
         InetSocketAddress result = ConfigReader.readAddress(reader);
@@ -27,14 +27,14 @@ public class ConfigReaderTest {
         Assert.assertEquals(expected, result);
     }
 
-    @Test (expected = ConfigDataNotFoundException.class)
+    @Test(expected = ConfigDataNotFoundException.class)
     public void noPortInConfigTest() {
         reader = new StringReader("hostname: gasgsf\n");
 
         ConfigReader.readAddress(reader);
     }
 
-    @Test (expected = ConfigDataNotFoundException.class)
+    @Test(expected = ConfigDataNotFoundException.class)
     public void noAddressInConfigTest() {
         reader = new StringReader("port: 1235");
 

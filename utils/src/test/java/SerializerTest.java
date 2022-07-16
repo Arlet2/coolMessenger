@@ -3,10 +3,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import utils.Serializer;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-
 public class SerializerTest {
 
     @Test

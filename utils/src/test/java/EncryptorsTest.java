@@ -16,16 +16,18 @@ public class EncryptorsTest {
 
         Assert.assertEquals(input, result);
     }
+
     @Test
     public void nullEncryptorDecryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorsFactory.getEncryptor(0);
         String input = "Hello, world!";
 
         String result = (String)
-        Serializer.convertBytesToObject(encryptor.decrypt(encryptor.encrypt(Serializer.convertObjectToBytes(input))));
+                Serializer.convertBytesToObject(encryptor.decrypt(encryptor.encrypt(Serializer.convertObjectToBytes(input))));
 
         Assert.assertEquals(input, result);
     }
+
     @Test
     public void simpleEncryptorEncryptionTest() throws SerializerException {
         EncryptorService encryptor = EncryptorsFactory.getEncryptor(1);

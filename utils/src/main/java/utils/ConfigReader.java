@@ -20,6 +20,7 @@ public class ConfigReader {
     private static Reader createFileReader(String path) throws FileNotFoundException {
         return new FileReader(path);
     }
+
     private static Reader createFileReader(URL url) throws FileNotFoundException {
         return createFileReader(url.getPath());
     }
