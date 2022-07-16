@@ -9,8 +9,8 @@ import utils.Serializer;
 public class BasicPackageService implements PackageService {
     private final EncryptorService encryptor;
 
-    public BasicPackageService(EncryptorService encryptor) {
-        this.encryptor = encryptor;
+    public BasicPackageService(int encryptorProtocol) {
+        this.encryptor = EncryptorsFactory.getEncryptor(encryptorProtocol);
     }
 
     @Override
