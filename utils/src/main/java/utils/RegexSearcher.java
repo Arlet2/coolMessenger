@@ -6,6 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegexSearcher {
+
+    private RegexSearcher() {
+
+    }
+
     public static String searchFirst(String regex, String input) throws NotFoundByRegexException {
         Matcher matcher = Pattern.compile(regex).matcher(input);
         matcher.find();

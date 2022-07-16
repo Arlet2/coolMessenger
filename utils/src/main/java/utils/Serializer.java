@@ -5,6 +5,11 @@ import exceptions.SerializerException;
 import java.io.*;
 
 public class Serializer {
+
+    private Serializer() {
+
+    }
+
     public static Object convertBytesToObject(byte[] bytes) throws SerializerException {
         ByteArrayInputStream byteStream = new ByteArrayInputStream(bytes);
         return convertByteStreamToObject(byteStream);

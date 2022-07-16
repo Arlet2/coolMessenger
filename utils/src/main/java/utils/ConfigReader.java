@@ -13,6 +13,10 @@ public class ConfigReader {
     private final static String portRegex = "(?<=port:\\s{1,5})[^\\s]*";
     private final static String hostNameRegex = "(?<=hostname:\\s{1,5})[^\\s]*";
 
+    private ConfigReader() {
+
+    }
+
     public static InetSocketAddress readAddress(String path) throws StreamReadingException, FileNotFoundException {
         return readAddress(createFileReader(path));
     }

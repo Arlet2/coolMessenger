@@ -10,6 +10,10 @@ public class Logger {
     private static final String LOGGER_CONFIG_FILE_NAME = "logger.ar";
     private static java.util.logging.Logger logger;
 
+    private Logger() {
+
+    }
+
     public static java.util.logging.Logger getInstance() {
         if (logger != null)
             return logger;
