@@ -6,6 +6,7 @@ import exceptions.StreamReadingException;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.net.URL;
 import java.util.stream.Collectors;
 
 public class ConfigReader {
@@ -13,7 +14,18 @@ public class ConfigReader {
     private final static String hostNameRegex = "(?<=hostname:\\s{1,5})[^\\s]*";
 
     public static InetSocketAddress readAddress(String path) throws StreamReadingException, FileNotFoundException {
-        return readAddress(new FileReader(path));
+        return readAddress(createFileReader(path));
+    }
+
+    private static Reader createFileReader(String path) throws FileNotFoundException {
+        return new FileReader(path);
+    }
+    private static Reader createFileReader(URL url) throws FileNotFoundException {
+        return createFileReader(url.getPath());
+    }
+
+    public static InetSocketAddress readAddress(URL resourceURL) throws StreamReadingException, FileNotFoundException {
+        return readAddress(createFileReader(resourceURL));
     }
 
     public static InetSocketAddress readAddress(Reader reader) throws StreamReadingException {
@@ -37,7 +49,11 @@ public class ConfigReader {
     }
 
     public static int readPort(String path) throws StreamReadingException, FileNotFoundException {
-        return readPort(new FileReader(path));
+        return readPort(createFileReader(path));
+    }
+
+    public static int readPort(URL resourceURL) throws StreamReadingException, FileNotFoundException {
+        return readPort(createFileReader(resourceURL));
     }
 
     public static int readPort(Reader reader) {

@@ -22,12 +22,11 @@ public class ConnectionService {
 
     private int assignPort() {
         try {
-            return ConfigReader.readPort(CONFIG_FILE_NAME);
+            return ConfigReader.readPort(ConnectionService.class.getResource(CONFIG_FILE_NAME));
         } catch (FileNotFoundException e) {
             Logger.getInstance().warning(CONFIG_FILE_NAME + " not found. Application will use default port: "
                     + DEFAULT_SERVER_PORT);
         } catch (StreamReadingException e) {
-            System.out.println("Error with reading");
             Logger.getInstance().warning("Error with file reading. Application will use default port: " +
                     DEFAULT_SERVER_PORT);
         }
