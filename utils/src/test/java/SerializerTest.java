@@ -1,20 +1,13 @@
 import exceptions.SerializerException;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import utils.Serializer;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+
 public class SerializerTest {
-    @Test
-    @Ignore // TODO: придумать как проверять корректность перевода в байты
-    public void convertToObjectTest() throws SerializerException {
-        Object result;
-        String expected = "Hello, world";
-
-        result = Serializer.convertBytesToObject(expected.getBytes());
-
-        Assert.assertEquals(expected, result);
-    }
 
     @Test
     public void doubleConversionTest() throws SerializerException {

@@ -6,9 +6,13 @@ import java.io.*;
 
 public class Serializer {
     public static Object convertBytesToObject(byte[] bytes) throws SerializerException {
+        ByteArrayInputStream byteStream = new ByteArrayInputStream(bytes);
+        return convertByteStreamToObject(byteStream);
+    }
+
+    public static Object convertByteStreamToObject(InputStream stream) throws SerializerException {
         try {
-            ByteArrayInputStream byteStream = new ByteArrayInputStream(bytes);
-            ObjectInputStream objStream = new ObjectInputStream(byteStream);
+            ObjectInputStream objStream = new ObjectInputStream(stream);
             return objStream.readObject();
         } catch (IOException e) {
             e.printStackTrace();
