@@ -13,7 +13,7 @@ public class BasicPackageService implements PackageService {
     }
 
     @Override
-    public NetDTO encryptPackageData(Object object, NetDTO.DataCode code)
+    public NetDTO packageDataWithEncryption(Object object, NetDTO.DataCode code)
             throws SerializerException {
         byte[] bytes = Serializer.convertObjectToBytes(object);
         return generalizedPackage(encryptor.encrypt(bytes), code);
@@ -25,7 +25,7 @@ public class BasicPackageService implements PackageService {
     }
 
     @Override
-    public NetDTO decryptPackageData(NetDTO dto) {
+    public NetDTO decryptData(NetDTO dto) {
         return new NetDTO(encryptor.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
     }
 
