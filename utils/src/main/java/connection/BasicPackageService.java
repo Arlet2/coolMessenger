@@ -2,13 +2,14 @@ package connection;
 
 import connection.data_objects.NetDTO;
 import encryptors.EncryptorService;
+import encryptors.EncryptorsFactory;
 import exceptions.SerializerException;
 import utils.Serializer;
 
 public class BasicPackageService implements PackageService {
     private final EncryptorService encryptor;
 
-    BasicPackageService(EncryptorService encryptor) {
+    public BasicPackageService(EncryptorService encryptor) {
         this.encryptor = encryptor;
     }
 
@@ -26,7 +27,8 @@ public class BasicPackageService implements PackageService {
 
     @Override
     public NetDTO decryptData(NetDTO dto) {
-        return new NetDTO(encryptor.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
+        EncryptorService decoder = EncryptorsFactory.getEncryptor(dto.getEncryptionProtocol());
+        return new NetDTO(decoder.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
     }
 
     private NetDTO generalizedPackage(byte[] data, NetDTO.DataCode code) {
