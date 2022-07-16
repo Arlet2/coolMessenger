@@ -1,11 +1,11 @@
 package connection;
 
-import connection.data_objects.DataTransferObject;
+import connection.data_objects.NetDTO;
 import exceptions.SerializerException;
 
 public interface PackageService {
-    DataTransferObject encryptPackageData(Object object, DataTransferObject.DataCode code) throws SerializerException;
+    NetDTO encryptPackageData(Object object, NetDTO.DataCode code) throws SerializerException;
 
-    DataTransferObject packageData(Object object, DataTransferObject.DataCode code) throws SerializerException;
-    DataTransferObject decryptPackageData(DataTransferObject dto);
+    NetDTO packageData(Object object, NetDTO.DataCode code) throws SerializerException;
+    NetDTO decryptPackageData(NetDTO dto);
 }

@@ -1,6 +1,6 @@
 package connection.data_objects;
 
-public class DataTransferObject {
+public class NetDTO {
     private final byte[] bytes;
     private final DataCode code;
     private final int encryptionProtocol;
@@ -13,7 +13,7 @@ public class DataTransferObject {
         FILE
     }
 
-    public DataTransferObject(byte[] data, DataCode code, int encryptionProtocol) {
+    public NetDTO(byte[] data, DataCode code, int encryptionProtocol) {
         this.encryptionProtocol = encryptionProtocol;
         bytes = data;
         this.code = code;

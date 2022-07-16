@@ -1,6 +1,6 @@
 package connection;
 
-import connection.data_objects.DataTransferObject;
+import connection.data_objects.NetDTO;
 import encryptors.EncryptorService;
 import exceptions.SerializerException;
 import utils.Serializer;
@@ -13,23 +13,23 @@ public class BasicPackageService implements PackageService {
     }
 
     @Override
-    public DataTransferObject encryptPackageData(Object object, DataTransferObject.DataCode code)
+    public NetDTO encryptPackageData(Object object, NetDTO.DataCode code)
             throws SerializerException {
         byte[] bytes = Serializer.convertObjectToBytes(object);
         return generalizedPackage(encryptor.encrypt(bytes), code);
     }
 
     @Override
-    public DataTransferObject packageData(Object object, DataTransferObject.DataCode code) throws SerializerException {
+    public NetDTO packageData(Object object, NetDTO.DataCode code) throws SerializerException {
         return generalizedPackage(Serializer.convertObjectToBytes(object), code);
     }
 
     @Override
-    public DataTransferObject decryptPackageData(DataTransferObject dto) {
-        return new DataTransferObject(encryptor.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
+    public NetDTO decryptPackageData(NetDTO dto) {
+        return new NetDTO(encryptor.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
     }
 
-    private DataTransferObject generalizedPackage(byte[] data, DataTransferObject.DataCode code) {
-        return new DataTransferObject(data, code, encryptor.getEncryptionProtocol());
+    private NetDTO generalizedPackage(byte[] data, NetDTO.DataCode code) {
+        return new NetDTO(data, code, encryptor.getEncryptionProtocol());
     }
 }
