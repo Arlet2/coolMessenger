@@ -22,7 +22,7 @@ public class BasicNetDataExchangeHandler implements NetDataExchangeHandler {
     }
 
     @Override
-    public NetDTO getDTO(Socket socket) {
+    public NetDTO receiveDTO(Socket socket) {
         try {
             byte[] data = socket.getInputStream().readAllBytes();
             return (NetDTO) Serializer.convertBytesToObject(data);

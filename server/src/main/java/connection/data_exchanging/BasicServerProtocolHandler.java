@@ -14,7 +14,7 @@ public class BasicServerProtocolHandler implements ServerProtocolHandler {
 
     @Override
     public AuthDataObject createSession(Socket socket) {
-        NetDTO dto = netDataExchangeHandler.getDTO(socket);
+        NetDTO dto = netDataExchangeHandler.receiveDTO(socket);
         return (AuthDataObject) packageService.unpackDataWithDecryption(dto);
     }
 

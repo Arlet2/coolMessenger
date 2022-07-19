@@ -8,6 +8,6 @@ public interface NetDataExchangeHandler {
 
     void sendDTO(Socket socket, NetDTO dto);
 
-    NetDTO getDTO(Socket socket);
+    NetDTO receiveDTO(Socket socket);
 
 }
