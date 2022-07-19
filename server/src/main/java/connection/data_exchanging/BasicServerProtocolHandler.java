@@ -3,7 +3,6 @@ package connection.data_exchanging;
 import connection.*;
 import connection.data_objects.AuthDataObject;
 import connection.data_objects.NetDTO;
-import utils.Serializer;
 
 import java.net.Socket;
 
@@ -16,7 +15,7 @@ public class BasicServerProtocolHandler implements ServerProtocolHandler {
     @Override
     public AuthDataObject createSession(Socket socket) {
         NetDTO dto = netDataExchangeHandler.getDTO(socket);
-        return (AuthDataObject) Serializer.convertBytesToObject(packageService.decryptData(dto).getBytes());
+        return (AuthDataObject) packageService.unpackDataWithDecryption(dto);
     }
 
     @Override
