@@ -17,7 +17,7 @@ public class RegexSearcher {
         try {
             return input.substring(matcher.start(), matcher.end());
         } catch (IllegalStateException e) {
-            throw new NotFoundByRegexException();
+            throw new NotFoundByRegexException(e);
         }
     }
 

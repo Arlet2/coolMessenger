@@ -17,7 +17,7 @@ public class ConfigReader {
 
     }
 
-    public static InetSocketAddress readAddress(String path) throws StreamReadingException, FileNotFoundException {
+    public static InetSocketAddress readAddress(String path) throws FileNotFoundException {
         return readAddress(createFileReader(path));
     }
 
@@ -29,11 +29,11 @@ public class ConfigReader {
         return createFileReader(url.getPath());
     }
 
-    public static InetSocketAddress readAddress(URL resourceURL) throws StreamReadingException, FileNotFoundException {
+    public static InetSocketAddress readAddress(URL resourceURL) throws FileNotFoundException {
         return readAddress(createFileReader(resourceURL));
     }
 
-    public static InetSocketAddress readAddress(Reader reader) throws StreamReadingException {
+    public static InetSocketAddress readAddress(Reader reader) {
         String lines = readLines(reader);
 
         String hostname = readHostnameOnLines(lines);
@@ -48,16 +48,16 @@ public class ConfigReader {
             for (String line : bufferedReader.lines().collect(Collectors.toList()))
                 strBuilder.append(line).append("\n");
         } catch (IOException e) {
-            throw new StreamReadingException("Address reading is failed");
+            throw new StreamReadingException("Address reading is failed", e);
         }
         return strBuilder.toString();
     }
 
-    public static int readPort(String path) throws StreamReadingException, FileNotFoundException {
+    public static int readPort(String path) throws FileNotFoundException {
         return readPort(createFileReader(path));
     }
 
-    public static int readPort(URL resourceURL) throws StreamReadingException, FileNotFoundException {
+    public static int readPort(URL resourceURL) throws FileNotFoundException {
         return readPort(createFileReader(resourceURL));
     }
 
@@ -69,7 +69,7 @@ public class ConfigReader {
         try {
             return Integer.parseInt(RegexSearcher.searchFirst(portRegex, lines));
         } catch (NotFoundByRegexException e) {
-            throw new ConfigDataNotFoundException("Port not found");
+            throw new ConfigDataNotFoundException("Port not found", e);
         }
     }
 
@@ -77,7 +77,7 @@ public class ConfigReader {
         try {
             return RegexSearcher.searchFirst(hostNameRegex, lines);
         } catch (NotFoundByRegexException e) {
-            throw new ConfigDataNotFoundException("Hostname not found");
+            throw new ConfigDataNotFoundException("Hostname not found", e);
         }
     }
 }

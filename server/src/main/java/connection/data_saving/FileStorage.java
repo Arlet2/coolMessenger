@@ -31,7 +31,7 @@ public class FileStorage implements DataStorageService {
 
             writer.write(byteString.getBytesString());
         } catch (IOException | SerializerException e) {
-            throw new DataSavingException("Saving to file is failed");
+            throw new DataSavingException("Saving to file is failed", e);
         }
     }
 
@@ -47,7 +47,7 @@ public class FileStorage implements DataStorageService {
             return Serializer.convertBytesToObject(
                     encryptor.decrypt(ByteString.convertByteStringToBytes(byteString.toString())));
         } catch (IOException | SerializerException e) {
-            throw new DataSavingException("Loading from file is failed");
+            throw new DataSavingException("Loading from file is failed", e);
         }
     }
 

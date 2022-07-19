@@ -21,7 +21,7 @@ public class BasicPackageService implements PackageService {
     }
 
     @Override
-    public NetDTO packData(Object object, NetDTO.DataCode code) throws SerializerException {
+    public NetDTO packData(Object object, NetDTO.DataCode code) {
         return generalizedPack(Serializer.convertObjectToBytes(object), code);
     }
 
