@@ -14,24 +14,33 @@ public class BasicPackageService implements PackageService {
     }
 
     @Override
-    public NetDTO packageDataWithEncryption(Object object, NetDTO.DataCode code)
+    public NetDTO packDataWithEncryption(Object object, NetDTO.DataCode code)
             throws SerializerException {
         byte[] bytes = Serializer.convertObjectToBytes(object);
-        return generalizedPackage(encryptor.encrypt(bytes), code);
+        return generalizedPack(encryptor.encrypt(bytes), code);
     }
 
     @Override
-    public NetDTO packageData(Object object, NetDTO.DataCode code) throws SerializerException {
-        return generalizedPackage(Serializer.convertObjectToBytes(object), code);
+    public NetDTO packData(Object object, NetDTO.DataCode code) throws SerializerException {
+        return generalizedPack(Serializer.convertObjectToBytes(object), code);
     }
 
     @Override
-    public NetDTO decryptData(NetDTO dto) {
+    public Object unpackDataWithDecryption(NetDTO dto) {
         EncryptorService decoder = EncryptorsFactory.getEncryptor(dto.getEncryptionProtocol());
-        return new NetDTO(decoder.decrypt(dto.getBytes()), dto.getCode(), dto.getEncryptionProtocol());
+        return generalizedUnpack(decoder.decrypt(dto.getBytes()));
     }
 
-    private NetDTO generalizedPackage(byte[] data, NetDTO.DataCode code) {
+    @Override
+    public Object unpackData(NetDTO dto) {
+        return generalizedUnpack(dto.getBytes());
+    }
+
+    private Object generalizedUnpack(byte[] bytes) {
+        return Serializer.convertBytesToObject(bytes);
+    }
+
+    private NetDTO generalizedPack(byte[] data, NetDTO.DataCode code) {
         return new NetDTO(data, code, encryptor.getEncryptionProtocol());
     }
 }
