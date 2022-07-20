@@ -46,7 +46,8 @@ public class FileStorage implements DataStorageService {
             byteString.deleteCharAt(byteString.length() - 1);
 
             return Serializer.convertBytesToObject(
-                    encryptor.decrypt(ByteString.convertByteStringToBytes(byteString.toString())));
+                    encryptor.decrypt(new ByteString(byteString.toString()).getBytes())
+            );
         } catch (IOException | SerializerException e) {
             throw new DataSavingException("Loading from file is failed", e);
         }
