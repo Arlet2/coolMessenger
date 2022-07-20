@@ -11,10 +11,11 @@ import java.io.*;
 import java.util.stream.Collectors;
 
 public class FileStorage implements DataStorageService {
-    private final EncryptorService encryptor = EncryptorsFactory.getEncryptor(1);
+    private final EncryptorService encryptor;
     private String filePath;
 
-    public FileStorage(String filePath) {
+    public FileStorage(int encryptionProtocol, String filePath) {
+        encryptor = EncryptorsFactory.getEncryptor(encryptionProtocol);
         changeFilePath(filePath);
     }
 
@@ -24,12 +25,12 @@ public class FileStorage implements DataStorageService {
 
     @Override
     public void saveData(Object object) {
-        try (FileWriter writer = new FileWriter(filePath)) {
-
+        try (FileWriter writer = new FileWriter(filePath, false)) {
             ByteString byteString = new ByteString(
                     encryptor.encrypt(Serializer.convertObjectToBytes(object)));
 
             writer.write(byteString.getBytesString());
+            writer.flush();
         } catch (IOException | SerializerException e) {
             throw new DataSavingException("Saving to file is failed", e);
         }
