@@ -25,7 +25,7 @@ public class SimpleEncryptor implements EncryptorService {
 
     private byte[] crypt(byte[] data) {
         for (int i = 0; i < data.length; i++)
-            data[i] = (byte) (data[i] ^ 0xf);
+            data[i] = (byte) (data[i] ^ 0xff);
         return data;
     }
 }
