@@ -7,7 +7,7 @@ public class ByteString {
         byteString = convertBytesToByteString(bytes);
     }
 
-    ByteString(String byteString) {
+    public ByteString(String byteString) {
         this.byteString = byteString;
     }
 
