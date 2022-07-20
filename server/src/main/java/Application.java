@@ -117,7 +117,7 @@ public class Application {
 
         protocolHandler = new BasicServerProtocolHandler();
 
-        storageService = new FileStorage("");
+        storageService = new FileStorage(1,"test_users.bin");
 
         initDependentByProtocolHandlerServices();
 

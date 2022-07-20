@@ -18,7 +18,7 @@ public class FileStorageTest {
     @Test
     public void readingFileTest() throws DataSavingException {
         String input = "HELLO MY DEAR ALEXANDR PAVLOV!!!!";
-        DataStorageService storageService = new FileStorage(testFileName);
+        DataStorageService storageService = new FileStorage(1, testFileName);
 
         storageService.saveData(input);
         String result = (String) storageService.loadData();
