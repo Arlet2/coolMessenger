@@ -1,5 +1,6 @@
 package connection;
 
+import exceptions.ServerOpeningException;
 import exceptions.StreamReadingException;
 import server_utils.Logger;
 import utils.ConfigReader;
@@ -44,8 +45,8 @@ public class ConnectionService {
             serverSocket = new ServerSocket(serverPort);
             Logger.getInstance().info("Server is opened on " + serverPort + " port");
         } catch (IOException e) {
-            e.printStackTrace();
             Logger.getInstance().severe("Server was not opened. Try to use another port.");
+            throw new ServerOpeningException(e);
         }
     }
 
