@@ -10,7 +10,9 @@ public class NetDTO {
         MESSAGE,
         EMOJI,
         PICTURE,
-        FILE
+        FILE,
+
+        ERROR
     }
 
     public NetDTO(byte[] data, DataCode code, int encryptionProtocol) {
