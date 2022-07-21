@@ -27,6 +27,7 @@ public class Application {
     private static DataStorageService storageService;
     private static PackageService packageService;
     private static AuthService authService;
+    private static SendService sendService;
 
     // workers
 
@@ -92,6 +93,7 @@ public class Application {
     private static void initDependentByProtocolHandlerServices() {
         netDataExchangeHandler = protocolHandler.getNetExchangeHandler();
         packageService = protocolHandler.getPackageService();
+        sendService = new BasicSendService(protocolHandler);
     }
 
     private static void createServerTerminal() {
@@ -181,9 +183,7 @@ public class Application {
     }
 
     private static void disconnectWithSocket(Socket socket, String msg) {
-        // TODO: создать отдельный метод под отправку ошибок и сообщений
-        NetDTO dto = packageService.packDataWithEncryption(msg, NetDTO.DataCode.ERROR);
-        netDataExchangeHandler.sendDTO(socket, dto);
+        sendService.sendError(msg, socket);
 
         disconnectWithSocket(socket);
     }
