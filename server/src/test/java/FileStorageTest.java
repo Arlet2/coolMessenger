@@ -1,21 +1,12 @@
 import connection.data_saving.DataStorageService;
 import connection.data_saving.FileStorage;
-import encryptors.EncryptorService;
-import encryptors.EncryptorsFactory;
 import exceptions.DataSavingException;
-import exceptions.SerializerException;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
-import utils.ByteString;
-import utils.Serializer;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class FileStorageTest {
     private static final String testFileName = "test.txt";
