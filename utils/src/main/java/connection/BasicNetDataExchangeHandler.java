@@ -11,7 +11,7 @@ import java.net.Socket;
 public class BasicNetDataExchangeHandler implements NetDataExchangeHandler {
 
     @Override
-    public void sendDTO(Socket socket, NetDTO dto) {
+    public void sendDTO(Socket socket, NetDTO dto) throws NetDataTransferException {
         try {
             byte[] data = Serializer.convertObjectToBytes(dto);
             socket.getOutputStream().write(data);
@@ -22,7 +22,7 @@ public class BasicNetDataExchangeHandler implements NetDataExchangeHandler {
     }
 
     @Override
-    public NetDTO receiveDTO(Socket socket) {
+    public NetDTO receiveDTO(Socket socket) throws NetDataTransferException {
         try {
             byte[] data = socket.getInputStream().readAllBytes();
             return (NetDTO) Serializer.convertBytesToObject(data);
