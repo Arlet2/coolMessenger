@@ -1,3 +1,8 @@
+import connection.data_objects.AuthDataObject;
+import connection.data_objects.NetDTO;
+import exceptions.AuthException;
+import exceptions.DataSavingException;
+import exceptions.IncorrectProtocolException;
 import server_utils.Logger;
 import connection.*;
 import connection.data_exchanging.BasicServerProtocolHandler;
@@ -43,6 +48,29 @@ public class Application {
         packageService.decryptData();
 
         */
+    }
+
+    private static void initServices() {
+
+        connectionService = new ConnectionService();
+
+        protocolHandler = new BasicServerProtocolHandler();
+
+        storageService = new FileStorage(1, "test_users.bin");
+
+        initDependentByProtocolHandlerServices();
+
+        try {
+            authService = new BasicAuthService(protocolHandler, storageService);
+        } catch (DataSavingException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    private static void initDependentByProtocolHandlerServices() {
+        netDataExchangeHandler = protocolHandler.getNetExchangeHandler();
+        packageService = protocolHandler.getPackageService();
     }
 
     private static void createServerTerminal() {
@@ -104,28 +132,38 @@ public class Application {
             authWorkers.execute(Application::initUser);
         }
 
-        /*
-        User user = ..<auth service>..
-         */
+        AuthDataObject authDataObject = protocolHandler.createSession(socket);
+        User user;
+        try {
+            user = new User(authService.authUserAndGetNickname(authDataObject), socket);
+        } catch (AuthException e) {
+            e.printStackTrace();
+            Logger.getInstance().severe(e.getMessage());
+            disconnectWithSocket(socket, e.getMessage());
+            return;
+        } catch (IncorrectProtocolException e) {
+            e.printStackTrace();
+            Logger.getInstance().severe("Incorrect protocol on client");
+            disconnectWithSocket(socket);
+            return;
+        }
 
         // go to standard workers
     }
 
-    private static void initServices() {
-
-        connectionService = new ConnectionService();
-
-        protocolHandler = new BasicServerProtocolHandler();
-
-        storageService = new FileStorage(1,"test_users.bin");
-
-        initDependentByProtocolHandlerServices();
-
-        authService = new BasicAuthService(protocolHandler, storageService);
+    private static void disconnectWithSocket(Socket socket) {
+        try {
+            socket.close();
+        } catch (IOException ignored) {
+            // если не получается отключить сокет, то он всё равно не будет использоваться
+        }
     }
 
-    private static void initDependentByProtocolHandlerServices() {
-        netDataExchangeHandler = protocolHandler.getNetExchangeHandler();
-        packageService = protocolHandler.getPackageService();
+    private static void disconnectWithSocket(Socket socket, String msg) {
+        // TODO: создать отдельный метод под отправку ошибок и сообщений
+        NetDTO dto = packageService.packDataWithEncryption(msg, NetDTO.DataCode.ERROR);
+        netDataExchangeHandler.sendDTO(socket, dto);
+
+        disconnectWithSocket(socket);
     }
 }
