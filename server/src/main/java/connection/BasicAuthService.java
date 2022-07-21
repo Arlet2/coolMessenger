@@ -2,8 +2,8 @@ package connection;
 
 import connection.data_exchanging.ServerProtocolHandler;
 import connection.data_objects.AuthDataObject;
-import connection.data_saving.DataStorageService;
-import connection.data_saving.UserCard;
+import data_saving.DataStorageService;
+import data_saving.UserCard;
 import exceptions.AuthException;
 import exceptions.DataSavingException;
 import exceptions.IncorrectProtocolException;

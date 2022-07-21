@@ -1,4 +1,4 @@
-package connection.data_saving;
+package data_saving;
 
 public interface DataStorageService {
     void saveData(Object object);

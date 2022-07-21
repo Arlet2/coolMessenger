@@ -1,5 +1,5 @@
-import connection.data_saving.DataStorageService;
-import connection.data_saving.FileStorage;
+import data_saving.DataStorageService;
+import data_saving.FileStorage;
 import exceptions.DataSavingException;
 import org.junit.AfterClass;
 import org.junit.Assert;
