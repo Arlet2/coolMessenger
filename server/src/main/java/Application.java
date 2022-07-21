@@ -8,8 +8,8 @@ import server_utils.Logger;
 import connection.*;
 import connection.data_exchanging.BasicServerProtocolHandler;
 import connection.data_exchanging.ServerProtocolHandler;
-import connection.data_saving.DataStorageService;
-import connection.data_saving.FileStorage;
+import data_saving.DataStorageService;
+import data_saving.FileStorage;
 import exceptions.ServerOpeningException;
 
 import java.io.IOException;
@@ -17,6 +17,8 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Application {
     private static ConnectionService connectionService;
@@ -28,7 +30,25 @@ public class Application {
 
     // workers
 
-    private static final ExecutorService authWorkers = Executors.newCachedThreadPool();
+    private static final ExecutorService authWorkers = Executors.newCachedThreadPool(new ThreadFactory() {
+        private final ThreadGroup group = new ThreadGroup("auth-workers");
+        private final AtomicInteger counter = new AtomicInteger(1);
+
+        @Override
+        public Thread newThread(Runnable r) {
+            return new Thread(group, r, group.getName() + "-" + counter.getAndIncrement());
+        }
+    });
+
+    private static final ExecutorService generalWorkers = Executors.newCachedThreadPool(new ThreadFactory() {
+        private final ThreadGroup group = new ThreadGroup("general-workers");
+        private final AtomicInteger counter = new AtomicInteger(1);
+
+        @Override
+        public Thread newThread(Runnable r) {
+            return new Thread(group, r, group.getName() + "-" + counter.getAndIncrement());
+        }
+    });
 
     public static void main(String[] args) {
 
