@@ -3,6 +3,7 @@ package connection.data_exchanging;
 import connection.*;
 import connection.data_objects.AuthDataObject;
 import connection.data_objects.NetDTO;
+import encryptors.SimpleEncryptor;
 
 import java.net.Socket;
 
@@ -10,7 +11,7 @@ public class BasicServerProtocolHandler implements ServerProtocolHandler {
     public static final int PROTOCOL_NUMBER = 10001;
 
     private final NetDataExchangeHandler netDataExchangeHandler = new BasicNetDataExchangeHandler();
-    private final PackageService packageService = new BasicPackageService(1);
+    private final PackageService packageService = new BasicPackageService(SimpleEncryptor.ENCRYPTION_PROTOCOL);
 
     @Override
     public AuthDataObject createSession(Socket socket) {

@@ -1,5 +1,6 @@
 import connection.data_objects.AuthDataObject;
 import connection.data_objects.NetDTO;
+import encryptors.SimpleEncryptor;
 import exceptions.AuthException;
 import exceptions.DataSavingException;
 import exceptions.IncorrectProtocolException;
@@ -56,7 +57,7 @@ public class Application {
 
         protocolHandler = new BasicServerProtocolHandler();
 
-        storageService = new FileStorage(1, "test_users.bin");
+        storageService = new FileStorage(SimpleEncryptor.ENCRYPTION_PROTOCOL, "test_users.bin");
 
         initDependentByProtocolHandlerServices();
 
