@@ -78,9 +78,12 @@ public class Application {
 
         protocolHandler = new BasicServerProtocolHandler();
 
-        storageService = new FileStorage(SimpleEncryptor.ENCRYPTION_PROTOCOL, "test_users.bin");
-
         initDependentByProtocolHandlerServices();
+
+        sendService = new BasicSendService(protocolHandler);
+
+
+        storageService = new FileStorage(SimpleEncryptor.ENCRYPTION_PROTOCOL, "test_users.bin");
 
         try {
             authService = new BasicAuthService(protocolHandler, storageService);
@@ -93,7 +96,7 @@ public class Application {
     private static void initDependentByProtocolHandlerServices() {
         netDataExchangeHandler = protocolHandler.getNetExchangeHandler();
         packageService = protocolHandler.getPackageService();
-        sendService = new BasicSendService(protocolHandler);
+
     }
 
     private static void createServerTerminal() {
