@@ -25,7 +25,7 @@ public class BasicAuthService implements AuthService {
 
     private void loadUserCards() {
         try {
-            userCards = new HashMap<>();
+            userCards = (HashMap<String, UserCard>) dataStorage.loadData();
         } catch (ClassCastException e) {
             throw new DataSavingException("Incorrect structure was saved on file", e);
         }
