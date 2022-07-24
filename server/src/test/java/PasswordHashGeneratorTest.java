@@ -26,4 +26,14 @@ public class PasswordHashGeneratorTest {
 
         Assert.assertEquals(result, result1);
     }
+
+    @Test
+    public void hashesEqualTest() {
+        String input = "test";
+
+        String result = PasswordHashGenerator.generateHash(input);
+
+        if(!PasswordHashGenerator.generateHash(input).equals(result))
+            Assert.fail();
+    }
 }
