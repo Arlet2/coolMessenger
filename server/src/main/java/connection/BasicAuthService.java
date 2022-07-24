@@ -31,6 +31,10 @@ public class BasicAuthService implements AuthService {
         }
     }
 
+    public void saveAllUsersData() {
+        dataStorage.saveData(userCards);
+    }
+
     public String authUserAndGetNickname(AuthDataObject authDataObject)
             throws AuthException, IncorrectProtocolException {
 
