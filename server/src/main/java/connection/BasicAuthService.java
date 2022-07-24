@@ -48,7 +48,9 @@ public class BasicAuthService implements AuthService {
     private void login(AuthDataObject authDataObject) throws AuthException {
         if (!isNicknameExist(authDataObject.getNickname()))
             throw new AuthException("This login is not exist");
-
+        String userPasswordHash = PasswordHashGenerator.generateHash(authDataObject.getPassword());
+        if (!userPasswordHash.equals(userCards.get(authDataObject.getNickname()).getPasswordHash()))
+            throw new AuthException("Incorrect password");
     }
 
     private void register(AuthDataObject authDataObject) throws AuthException {
@@ -61,7 +63,7 @@ public class BasicAuthService implements AuthService {
         return userCards.containsKey(nickname);
     }
 
-    private void createAndAppendUserCard(AuthDataObject authDataObject) {
+    private synchronized void createAndAppendUserCard(AuthDataObject authDataObject) {
         UserCard userCard = new UserCard(authDataObject.getNickname(),
                 PasswordHashGenerator.generateHash(authDataObject.getPassword()));
 
