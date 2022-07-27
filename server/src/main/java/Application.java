@@ -1,5 +1,4 @@
 import connection.data_objects.AuthDataObject;
-import connection.data_objects.NetDTO;
 import encryptors.SimpleEncryptor;
 import exceptions.AuthException;
 import exceptions.DataSavingException;
@@ -144,6 +143,9 @@ public class Application {
 
     private static void stop() {
         // disconnect all users + stop all workers
+        authWorkers.shutdown();
+
+        authService.saveAllUsersData();
     }
 
     private static void initUser() {
@@ -175,6 +177,9 @@ public class Application {
         }
 
         // go to standard workers
+        generalWorkers.execute(() -> {
+            processUser(user);
+        });
     }
 
     private static void disconnectWithSocket(Socket socket) {
@@ -189,5 +194,9 @@ public class Application {
         sendService.sendError(msg, socket);
 
         disconnectWithSocket(socket);
+    }
+
+    private static void processUser(User user) {
+
     }
 }
