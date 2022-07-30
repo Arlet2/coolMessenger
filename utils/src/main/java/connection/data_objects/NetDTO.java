@@ -7,11 +7,7 @@ public class NetDTO {
 
     public enum DataCode {
         AUTH_INFO,
-        MESSAGE,
-        EMOJI,
-        PICTURE,
-        FILE,
-
+        CHAT_CONTENT,
         ERROR
     }
 
