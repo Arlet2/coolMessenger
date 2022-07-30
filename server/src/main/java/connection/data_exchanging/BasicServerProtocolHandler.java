@@ -4,6 +4,7 @@ import connection.*;
 import connection.data_objects.AuthDataObject;
 import connection.data_objects.NetDTO;
 import encryptors.SimpleEncryptor;
+import exceptions.NetDataTransferException;
 
 import java.net.Socket;
 
@@ -14,8 +15,10 @@ public class BasicServerProtocolHandler implements ServerProtocolHandler {
     private final PackageService packageService = new BasicPackageService(SimpleEncryptor.ENCRYPTION_PROTOCOL);
 
     @Override
-    public AuthDataObject createSession(Socket socket) {
+    public AuthDataObject createSession(Socket socket) throws NetDataTransferException {
         NetDTO dto = netDataExchangeHandler.receiveDTO(socket);
+        if (!dto.getCode().equals(NetDTO.DataCode.AUTH_INFO))
+            throw new NetDataTransferException("Unexpected answer from client");
         return (AuthDataObject) packageService.unpackDataWithDecryption(dto);
     }
 
