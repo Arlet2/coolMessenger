@@ -1,4 +1,4 @@
-package connection.auth;
+package auth;
 
 import connection.data_objects.AuthDataObject;
 import exceptions.AuthException;
