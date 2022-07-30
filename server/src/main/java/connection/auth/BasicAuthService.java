@@ -1,4 +1,4 @@
-package connection;
+package connection.auth;
 
 import connection.data_exchanging.ServerProtocolHandler;
 import connection.data_objects.AuthDataObject;

@@ -1,4 +1,4 @@
-package connection;
+package connection.sending;
 
 import chat_data_objects.ChatData;
 import chat_data_objects.Message;

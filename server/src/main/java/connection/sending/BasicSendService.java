@@ -1,7 +1,8 @@
-package connection;
+package connection.sending;
 
 import chat_data_objects.ChatData;
-import chat_data_objects.Message;
+import connection.NetDataExchangeHandler;
+import connection.PackageService;
 import connection.data_exchanging.ServerProtocolHandler;
 import connection.data_objects.NetDTO;
 import exceptions.NetDataTransferException;
