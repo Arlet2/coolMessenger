@@ -16,7 +16,6 @@ public class BasicNetDataExchangeHandler implements NetDataExchangeHandler {
             byte[] data = Serializer.convertObjectToBytes(dto);
             socket.getOutputStream().write(data);
         } catch (IOException | SerializerException e) {
-            e.printStackTrace();
             throw new NetDataTransferException(e);
         }
     }
@@ -27,7 +26,6 @@ public class BasicNetDataExchangeHandler implements NetDataExchangeHandler {
             byte[] data = socket.getInputStream().readAllBytes();
             return (NetDTO) Serializer.convertBytesToObject(data);
         } catch (IOException | SerializerException e) {
-            e.printStackTrace();
             throw new NetDataTransferException(e);
         }
     }
